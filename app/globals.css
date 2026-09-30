@@ -131,6 +131,7 @@ p {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.25rem;
   user-select: none;
 }
