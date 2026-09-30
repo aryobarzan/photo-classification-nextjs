@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -17,7 +17,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
@@ -302,4 +302,11 @@ select.input-field {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Clip the icon name text to one icon-sized box so it does not flash while the font loads (display=swap). */
+.material-symbols-outlined {
+  display: inline-block;
+  width: 1em;
+  overflow: hidden;
 }
