@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- root layout, so the font applies to every page */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,add_a_photo,search&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,add_a_photo,login,search&display=swap"
         />
       </head>
       <body className="main">
