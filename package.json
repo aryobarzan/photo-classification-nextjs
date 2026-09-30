@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "i18n-iso-countries": "^7.14.0",
+    "jose": "^6.2.12",
     "next": "16.3.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -26,5 +27,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@12.4.2"
+  "packageManager": "pnpm@12.8.1"
 }
