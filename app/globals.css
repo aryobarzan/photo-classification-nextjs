@@ -24,3 +24,282 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/*  */
+:root,
+.core-theme {
+  --primary: #0f172a;
+  --on-primary: white;
+  --secondary: #2563eb;
+  --on-secondary: white;
+  --tertiary: #64748b;
+  --on-tertiary: white;
+}
+body {
+  background-color: #f7f9fb;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-title {
+  font-size: 3.125rem;
+  color: var(--gray-900);
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.125rem;
+  font-family:
+    "Inter Tight",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 3.125rem;
+  color: var(--gray-900);
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.125rem;
+  margin: 0;
+  font-family:
+    "Inter Tight",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+h2 {
+  font-size: 1.875rem;
+  color: var(--gray-900);
+  font-weight: 500;
+  line-height: 100%;
+  font-family:
+    "Inter Tight",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+p {
+  margin: 0;
+  color: var(--gray-700);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: inherit;
+  position: relative;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+
+.content h1 {
+  margin-top: 1.75rem;
+}
+
+.content p {
+  margin-top: 1.5rem;
+}
+
+.filled-button {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  user-select: none;
+}
+
+.filled-button:hover {
+  background-color: rgb(from var(--primary) r g b / 0.8);
+}
+
+.filled-button:active {
+  background-color: rgb(from var(--primary) r g b / 0.6);
+}
+
+.filled-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.text-button {
+  color: var(--secondary);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.text-button:hover {
+  color: rgb(from var(--secondary) r g b / 0.8);
+}
+
+.text-button:active {
+  color: rgb(from var(--secondary) r g b / 0.6);
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary);
+  border-radius: 50%;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  user-select: none;
+}
+
+.icon-button:hover {
+  background-color: rgb(from var(--secondary) r g b / 0.1);
+  color: rgb(from var(--secondary) r g b / 0.8);
+}
+
+.icon-button:active {
+  background-color: rgb(from var(--secondary) r g b / 0.2);
+  color: rgb(from var(--secondary) r g b / 0.6);
+}
+
+.input-field {
+  padding: 0.75rem 1rem;
+  margin: 0.25rem 0;
+  border: 1px solid black;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+select.input-field {
+  /* Set to `none` such that we can use a custom material icon instead of the browser's native/default arrow icon. */
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-icon {
+  position: absolute;
+  /* The padding on the right of the select element */
+  right: 0.75rem;
+  /* The vertical alignment of the icon (centered) */
+  top: 50%;
+  transform: translateY(-50%);
+  /* Let taps pass through the icon to the select element */
+  pointer-events: none;
+  font-size: 1.25rem;
+  color: black;
+}
+
+.form-box {
+  padding: 32px;
+  background-color: white;
+  min-width: 400px;
+  max-width: 400px;
+  border-radius: 0.375rem;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-error {
+  font-size: 0.8rem;
+  color: #dc2626;
+  margin-top: -0.25rem;
+}
+
+.textarea-field {
+  resize: vertical;
+  /* At least 3 lines of height */
+  min-height: 6rem;
+  line-height: 1.5;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.divider {
+  height: 2px;
+  margin: 2rem 0;
+  color: rgb(168, 167, 167);
+}
+
+.indeterminate-loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--secondary);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
