@@ -3,13 +3,21 @@ import { z } from "zod";
 export const userProfileSchema = z.object({
   // Optional, as it is not set when first creating the profile.
   user_id: z.number().optional(),
-  first_name: z.string().min(1),
-  last_name: z.string().min(1),
-  age: z.number().int().positive(),
+  first_name: z
+    .string()
+    .min(2)
+    .max(32)
+    .regex(/^[a-zA-Z]+$/),
+  last_name: z
+    .string()
+    .min(2)
+    .max(32)
+    .regex(/^[a-zA-Z]+$/),
+  age: z.number().int().min(18).max(120).positive(),
   gender: z.enum(["male", "female", "other"]),
   country_of_origin: z.string().min(1),
-  place_of_residence: z.string().min(1),
-  description: z.string().optional(),
+  place_of_residence: z.string().min(2).max(100),
+  description: z.string().max(500).optional(),
   profile_picture_filename: z.string().optional(),
   profile_picture_is_nsfw: z.boolean().optional(),
   profile_picture_classification: z.string().optional(),
@@ -27,6 +35,8 @@ export const userProfileUpdateSchema = userProfileSchema.omit({
   created_at: true,
   updated_at: true,
 });
+
+export type UserProfileUpdate = z.infer<typeof userProfileUpdateSchema>;
 
 export const userProfilePictureStatusSchema = z.object({
   status: z.enum(["processing", "rejected", "done"]),

@@ -5,7 +5,9 @@ import {
   userProfileSchema,
   UserProfile,
   userProfileUpdateSchema,
+  UserProfileUpdate,
 } from "../schemas/user";
+import { redirect } from "next/navigation";
 
 const ALLOWED_PICTURE_TYPES = ["image/jpeg", "image/png"];
 const MAX_PICTURE_SIZE = 4 * 1024 * 1024; // 4MB
@@ -16,8 +18,34 @@ export type UpdateUserProfileResult =
   | { ok: true; profile: UserProfile }
   | { ok: false; error: string };
 
+export async function saveUserProfile(
+  prevState: string | undefined,
+  formData: FormData,
+): Promise<string | undefined> {
+  const parsed = userProfileUpdateSchema.safeParse({
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    // FormData values are strings, but the schema expects a number.
+    age: Number(formData.get("age")),
+    gender: formData.get("gender"),
+    place_of_residence: formData.get("place_of_residence"),
+    country_of_origin: formData.get("country_of_origin"),
+    // get() returns null when the field is absent, which the schema rejects.
+    description: formData.get("description") ?? undefined,
+  });
+  if (!parsed.success) return "Invalid format.";
+  const picture = formData.get("profile_picture");
+
+  const result = await updateUserProfile(
+    parsed.data,
+    picture instanceof File && picture.size > 0 ? picture : null,
+  );
+  if (!result.ok) return "Profile update failed.";
+  redirect("/profile");
+}
+
 export async function updateUserProfile(
-  profileData: UserProfile,
+  profileData: UserProfileUpdate,
   profilePicture: File | null,
 ): Promise<UpdateUserProfileResult> {
   const preDataParse = userProfileUpdateSchema.safeParse(profileData);
