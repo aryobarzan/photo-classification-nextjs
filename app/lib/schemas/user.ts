@@ -32,6 +32,8 @@ export const userProfileSchema = z.object({
 
 export type UserProfile = z.infer<typeof userProfileSchema>;
 
+export const userProfileListSchema = z.array(userProfileSchema);
+
 export const userProfileUpdateSchema = userProfileSchema.omit({
   user_id: true,
   profile_picture_filename: true,

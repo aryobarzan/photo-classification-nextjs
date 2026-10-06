@@ -30,14 +30,14 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
       </Link>
       {isAdmin && (
         <Link
-          href="/admin-dashboard"
+          href="/dashboard"
           className={
-            pathname.startsWith("/admin-dashboard")
+            pathname.startsWith("/dashboard")
               ? `${styles.navLink} ${styles.navLinkActive}`
               : `${styles.navLink}`
           }
         >
-          Admin Dashboard
+          Dashboard
         </Link>
       )}
     </div>
