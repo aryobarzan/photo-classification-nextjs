@@ -2,33 +2,35 @@
 
 import Link from "next/link";
 import { startTransition, useActionState } from "react";
-import { login } from "../lib/actions/auth";
+import { register } from "../../lib/actions/auth";
 import { useForm } from "react-hook-form";
 
-type LoginForm = {
+type RegisterForm = {
   username: string;
   password: string;
+  repeatPassword: string;
 };
 
 // We use react-hook-form for instant client-side validation and feedback to the user.
 // We use useActionState to send the form data to the server action for double-validation and performing
 // the actual registration logic.
-export default function Login() {
+export default function Register() {
   const [errorMessage, formAction, isPending] = useActionState(
-    login,
+    register,
     undefined,
   );
 
   const {
-    register,
+    register: registerField, // Renamed to avoid naming conflict with server action
     handleSubmit,
+    getValues,
     formState: { isValid, errors },
-  } = useForm<LoginForm>({
+  } = useForm<RegisterForm>({
     mode: "onChange", // validate instantly
   });
 
   // 3. Trigger the form action ONLY if RHF validation passes
-  const onSubmit = (data: LoginForm) => {
+  const onSubmit = (data: RegisterForm) => {
     startTransition(() => {
       const formData = new FormData();
       formData.append("username", data.username);
@@ -49,7 +51,7 @@ export default function Login() {
           id="username"
           type="text"
           className="input-field"
-          {...register("username", {
+          {...registerField("username", {
             required: "Username is required.",
             minLength: {
               value: 4,
@@ -77,7 +79,7 @@ export default function Login() {
           id="password"
           type="password"
           className="input-field"
-          {...register("password", {
+          {...registerField("password", {
             required: "Password is required.",
             minLength: {
               value: 8,
@@ -87,27 +89,45 @@ export default function Login() {
               value: 64,
               message: "Password must be at most 64 characters.",
             },
+            deps: ["repeatPassword"], // re-run the mismatch check when password changes
           })}
         />
         {errors.password && (
           <p className="form-field-error">{errors.password.message}</p>
+        )}
+        <div className="mb-4"></div>
+        <label htmlFor="repeatPassword" className="form-label">
+          Repeat Password
+        </label>
+        <input
+          id="repeatPassword"
+          type="password"
+          className="input-field"
+          {...registerField("repeatPassword", {
+            required: "Please repeat your password.",
+            validate: (value) =>
+              value === getValues("password") || "Passwords do not match.",
+          })}
+        />
+        {errors.repeatPassword && (
+          <p className="form-field-error">{errors.repeatPassword.message}</p>
         )}
         <button
           type="submit"
           disabled={!isValid || isPending}
           className="filled-button mt-4"
         >
-          <span className="material-symbols-outlined">login</span>
-          Login
+          <span className="material-symbols-outlined">account_circle</span>
+          Register
         </button>
         {/* error stemming from server-side validation */}
         {errorMessage && <p className="form-field-error">{errorMessage}</p>}
       </form>
       <hr className="divider" />
       <div className="text-center">
-        Dont have an account?{" "}
-        <Link href="/register" className="text-button">
-          Register here
+        Already have an account?{" "}
+        <Link href="/login" className="text-button">
+          Login here
         </Link>
       </div>
     </div>

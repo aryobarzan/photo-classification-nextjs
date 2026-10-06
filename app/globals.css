@@ -256,7 +256,7 @@ select.input-field {
 
 .divider {
   height: 2px;
-  margin: 2rem 0;
+  margin: 0.25rem 0;
   color: rgb(168, 167, 167);
 }
 
@@ -283,4 +283,69 @@ select.input-field {
   display: inline-block;
   width: 1em;
   overflow: hidden;
+}
+
+progress {
+  /* remove browser's own animation */
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border: none;
+  /* Browser caps border-radius at half the element's shorter side.
+  In this case, the height is the shorter side. The arbitrarily large value of 9999px
+  ensures that the corners are always perfectly rounded (semicircles) no matter the chosen height. */
+  border-radius: 9999px;
+  background: rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  /* Without this, progress:indeterminate::after would position itself against the page. */
+  position: relative;
+}
+
+/* Determinate fill */
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+/* Chrome, Edge, Safari */
+progress::-webkit-progress-value {
+  background: var(--secondary);
+}
+/* FireFox */
+progress::-moz-progress-bar {
+  background: var(--secondary);
+}
+
+/* Indeterminate: a sliding bar */
+/* ::after - create child element inside progress to style.
+    We need two separate elements - the track and the bar. 
+    Without ::after, we would be modifying the track itself. */
+progress:indeterminate::after {
+  /* set content to empty "" such that child element is rendered */
+  content: "";
+  position: absolute;
+  /* TRBL */
+  /* pin it to top and bottom of track, i.e., give it the full track height without an explicit height. */
+  /* pin left edge to the track's left edge, and let width: 40% determine the width. 0 on the right edge
+  would cause the bar to cover the full track and ignore width: 40%. */
+  inset: 0 auto 0 0;
+  /* Bar is 40% of entire progress track's width */
+  width: 40%;
+  background: var(--secondary);
+  /* use same rounded corners as track */
+  border-radius: inherit;
+  animation: progress-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes progress-slide {
+  from {
+    /* start off the left edge (entirely out of view) */
+    /* translateX % is relative to the bar's own width: -100% shifts it left by exactly its width */
+    transform: translateX(-100%);
+  }
+  to {
+    /* end off right edge (out of view again) */
+    /* overflow: hidden on progress ensures the bar is properly clipped when outside the track */
+    /* The bar is 40% as wide as the track, so the track is 100 / 40 = 2.5 bars wide. */
+    /* Shifting the bar by 2.5 of its own widths (250%) moves its left edge to the track's right edge. */
+    transform: translateX(250%);
+  }
 }

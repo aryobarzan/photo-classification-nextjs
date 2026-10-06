@@ -7,17 +7,18 @@ import {
   useRef,
   useState,
 } from "react";
-import { saveUserProfile } from "../lib/actions/userUpdate";
+import { saveUserProfile } from "../../lib/actions/userUpdate";
 import { useForm } from "react-hook-form";
-import { UserProfileUpdate } from "../lib/schemas/user";
-import { COUNTRIES } from "../lib/data/countries";
+import { UserProfileUpdate } from "../../lib/schemas/user";
+import { COUNTRIES } from "../../lib/data/countries";
 import styles from "./ProfileEditor.module.css";
 
 export function ProfileEditorForm({
   defaultValues,
   currentPictureUrl,
 }: {
-  defaultValues: UserProfileUpdate;
+  // Partial because a user without a profile yet has no values (e.g. no age).
+  defaultValues: Partial<UserProfileUpdate>;
   currentPictureUrl: string | null;
 }) {
   const [errorMessage, formAction, isPending] = useActionState(
@@ -106,7 +107,9 @@ export function ProfileEditorForm({
           />
           <div className="flex flex-col">
             <span className="form-label">Profile Picture</span>
-            <p className="text-sm">Supported formats: JPG, PNG. Max size: 4MB.</p>
+            <p className="text-sm">
+              Supported formats: JPG, PNG. Max size: 4MB.
+            </p>
             {fileError && <p className="form-field-error">{fileError}</p>}
           </div>
         </div>
@@ -287,7 +290,6 @@ export function ProfileEditorForm({
           <p className="form-field-error">{errors.description.message}</p>
         )}
         <div className="mb-4"></div>
-
         {errorMessage && <p className="form-field-error">{errorMessage}</p>}
         <button
           type="submit"

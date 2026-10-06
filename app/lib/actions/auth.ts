@@ -74,16 +74,24 @@ async function loginRegister(
   password: string,
   isRegistering: boolean,
 ): Promise<User | null> {
-  // form data
-  const formData = new FormData();
-  formData.append("username", username);
-  formData.append("password", password);
+  // registration expects a JSON body, login expects form data
+  let body: FormData | string;
+  const headers: Record<string, string> = {};
+  if (isRegistering) {
+    body = JSON.stringify({ username, password });
+    headers["Content-Type"] = "application/json";
+  } else {
+    body = new FormData();
+    body.append("username", username);
+    body.append("password", password);
+  }
   // send request to /users/login or /users/register based on isRegistering flag
   const response = await fetch(
     `${environment.apiUrl}users/${isRegistering ? "register" : "login"}`,
     {
       method: "POST",
-      body: formData,
+      headers,
+      body,
     },
   );
 
@@ -103,10 +111,16 @@ async function loginRegister(
     });
     return parsedData.data.user;
   } else {
+    console.error(
+      `${isRegistering ? "Register" : "Login"} failed:`,
+      response.status,
+      await response.text(),
+    );
     return null;
   }
 }
 
 export async function logout(): Promise<void> {
   (await cookies()).delete("token");
+  redirect("/login");
 }

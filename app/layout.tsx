@@ -33,21 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- root layout, so the font applies to every page */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,add_a_photo,login,search&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,add_a_photo,expand_more,login,search,upload&display=swap"
         />
       </head>
       <body className="main">
         <div className="app-title mb-16 mt-8">Photo Classification</div>
         <div className="content">{children}</div>
-        <footer className="footer flex-col flex items-center gap-4">
-          <hr className="divider" />
-          <p>
-            <i>Photo Classification App</i>
-          </p>
-          {/* @if (authService.isLoggedIn()) {
-      <div className="text-button" (click)="logout()">Log out</div>
-    } */}
-        </footer>
       </body>
     </html>
   );

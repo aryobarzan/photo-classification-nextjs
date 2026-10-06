@@ -1,0 +1,29 @@
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  color: black;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.navLink {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid transparent;
+}
+.navLink:hover {
+  color: var(--secondary);
+}
+
+.navLinkActive {
+  color: var(--secondary);
+  border-bottom: 2px solid var(--secondary);
+  border-radius: 1px;
+}

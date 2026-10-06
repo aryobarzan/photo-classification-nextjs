@@ -10,10 +10,14 @@ import {
 } from "../schemas/user";
 import { cache } from "react";
 
-export const fetchUserProfile = cache(async (): Promise<UserProfile> => {
+// Returns null if the user has not created a profile yet (404).
+export const fetchUserProfile = cache(async (): Promise<UserProfile | null> => {
   const response = await apiFetch(`users/profile`, {
     method: "GET",
   });
+  if (response.status === 404) {
+    return null;
+  }
   if (!response.ok) {
     throw new Error("Failed to fetch user profile");
   }
