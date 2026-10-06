@@ -40,8 +40,8 @@ export async function saveUserProfile(
     parsed.data,
     picture instanceof File && picture.size > 0 ? picture : null,
   );
-  if (!result.ok) return "Profile update failed.";
-  redirect("/profile");
+  if (!result.ok) return result.error;
+  redirect("/");
 }
 
 export async function updateUserProfile(
@@ -89,6 +89,7 @@ export async function updateUserProfile(
     return { ok: false, error: "The server returned an unexpected response." };
   }
   // re-render profile page so the cached data isn't re-used
-  revalidatePath("/profile");
+  revalidatePath("/");
+  revalidatePath("/profile-editor");
   return { ok: true, profile: parsedData.data };
 }

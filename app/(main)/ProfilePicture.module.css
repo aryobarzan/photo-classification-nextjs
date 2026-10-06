@@ -1,0 +1,70 @@
+/* text-transform is inherited from the parent (e.g. Profile's capitalize), which would
+   break icon ligatures: "account_circle" must stay lowercase to render as an icon. */
+.placeholder,
+.stateBox {
+  text-transform: none;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tertiary);
+  user-select: none;
+}
+
+/* material-symbols-outlined is a global class, so it needs :global in a module. */
+.placeholder :global(.material-symbols-outlined) {
+  font-size: inherit;
+}
+
+.picture {
+  object-fit: cover;
+  border-radius: 0.375rem;
+  display: block;
+}
+
+.stateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.stateBox :global(.material-symbols-outlined) {
+  font-size: 2rem;
+}
+
+.stateLabel {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.processing {
+  background-color: #f1f5f9;
+  color: var(--tertiary);
+}
+
+.nsfw {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 1.4s linear infinite;
+  display: inline-block;
+}

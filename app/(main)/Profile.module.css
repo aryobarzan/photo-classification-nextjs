@@ -1,0 +1,24 @@
+.profileBox {
+  width: 100%;
+  min-width: 500px;
+  max-width: 800px;
+  padding: 32px;
+  background-color: white;
+  border-radius: 0.375rem;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Ensure text in the profileBox wraps correctly instead of overflowing.
+   Scoped to .profileBox, as CSS Modules reject bare element selectors. */
+.profileBox pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}

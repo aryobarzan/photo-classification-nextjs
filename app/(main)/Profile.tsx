@@ -1,7 +1,9 @@
+import { getProfilePictureUrl } from "../lib/actions/user";
 import { COUNTRIES } from "../lib/data/countries";
 import { UserProfile } from "../lib/schemas/user";
 import { isAdmin } from "../lib/session";
 import ProfilePicture from "./ProfilePicture";
+import styles from "./Profile.module.css";
 
 export default async function Profile({ profile }: { profile: UserProfile }) {
   function countryName(code: string): string {
@@ -9,27 +11,41 @@ export default async function Profile({ profile }: { profile: UserProfile }) {
   }
   const roleIsAdmin = await isAdmin();
   return (
-    <div className="profile-box">
+    <div className={styles.profileBox}>
       <div className="flex flex-row gap-2 items-center">
         <ProfilePicture
-          filename={profile.profile_picture_filename}
+          pictureUrl={
+            profile.profile_picture_filename
+              ? getProfilePictureUrl(profile.profile_picture_filename)
+              : undefined
+          }
           isNsfw={profile.profile_picture_is_nsfw}
-          processingStatus="processing"
+          // The profile has no explicit status field: a picture without a
+          // classification or NSFW verdict yet is still being processed.
+          initiallyProcessing={
+            !!profile.profile_picture_filename &&
+            profile.profile_picture_is_nsfw === undefined &&
+            !profile.profile_picture_classification
+          }
         />
-        <span className="name">
+        <span className={styles.name}>
           {profile.first_name}, {profile.last_name}
         </span>
       </div>
-      <div className="profile-info">
+      <div>
         <pre>
+          {/* JSX collapses newlines in source, so line breaks must be explicit. */}
           <b>Age:</b> {profile.age}
+          {"\n"}
           <b>Gender:</b> {profile.gender}
+          {"\n"}
           <b>Country of Origin:</b> {countryName(profile.country_of_origin)}
+          {"\n"}
           <b>Place of Residence:</b> {profile.place_of_residence}
           {profile.description && (
             <>
-              <b>Description </b>
-              {profile.description}
+              {"\n"}
+              <b>Description:</b> {profile.description}
             </>
           )}
         </pre>
@@ -38,10 +54,13 @@ export default async function Profile({ profile }: { profile: UserProfile }) {
             <hr className="divider" />
             <pre>
               <b>Created at:</b> {profile.created_at}
+              {"\n"}
               <b>Updated at:</b> {profile.updated_at}
+              {"\n"}
               <b>Profile Picture Classification:</b>{" "}
               {profile.profile_picture_classification || "N/A"}
-              <b>Profile Picture NSFW: </b>
+              {"\n"}
+              <b>Profile Picture NSFW:</b>{" "}
               {profile.profile_picture_is_nsfw !== undefined
                 ? profile.profile_picture_is_nsfw
                   ? "Yes"

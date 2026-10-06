@@ -1,8 +1,13 @@
 import { z } from "zod";
 
+// The API returns null for unset optional fields. Mapping it to undefined keeps
+// the inferred types as `T | undefined`.
+const optional = <T extends z.ZodType>(schema: T) =>
+  schema.nullish().transform((value) => value ?? undefined);
+
 export const userProfileSchema = z.object({
   // Optional, as it is not set when first creating the profile.
-  user_id: z.number().optional(),
+  user_id: optional(z.number()),
   first_name: z
     .string()
     .min(2)
@@ -17,12 +22,12 @@ export const userProfileSchema = z.object({
   gender: z.enum(["male", "female", "other"]),
   country_of_origin: z.string().min(1),
   place_of_residence: z.string().min(2).max(100),
-  description: z.string().max(500).optional(),
-  profile_picture_filename: z.string().optional(),
-  profile_picture_is_nsfw: z.boolean().optional(),
-  profile_picture_classification: z.string().optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
+  description: optional(z.string().max(500)),
+  profile_picture_filename: optional(z.string()),
+  profile_picture_is_nsfw: optional(z.boolean()),
+  profile_picture_classification: optional(z.string()),
+  created_at: optional(z.string()),
+  updated_at: optional(z.string()),
 });
 
 export type UserProfile = z.infer<typeof userProfileSchema>;
