@@ -1,0 +1,174 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.filtersRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  min-height: calc(10 * 2.5rem + 2.5rem + 0.75rem + 0.6rem); /* 10 data rows + header */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table thead tr {
+  border-bottom: 2px solid var(--primary);
+}
+
+.table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th.sortable:hover {
+  color: var(--secondary);
+}
+
+.sortIcon {
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+  color: var(--tertiary);
+}
+
+.table tbody {
+  display: table-row-group;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table tbody tr:hover {
+  background-color: rgb(from var(--primary) r g b / 0.1);
+}
+
+.table tbody tr:active {
+  background-color: rgb(from var(--primary) r g b / 0.2);
+}
+
+.table tr.clickableRow {
+  cursor: pointer;
+}
+
+.table td {
+  padding: 0.6rem 0.75rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--tertiary);
+  padding: 2rem;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+  font-size: 0.9rem;
+}
+
+.floatingLabelWrapper {
+  position: relative;
+}
+
+.floatingLabelWrapper input {
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.floatingLabelWrapper label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: gray;
+  pointer-events: none;
+  transition:
+    top 0.15s,
+    font-size 0.15s,
+    color 0.15s;
+}
+
+.floatingLabelWrapper input:not(:placeholder-shown) + label,
+.floatingLabelWrapper input:focus + label {
+  top: 6px;
+  transform: none;
+  font-size: 0.6rem;
+  color: gray;
+}
+
+.inputField {
+  background-color: white;
+  border-radius: 6px;
+  height: 38px;
+}
+
+.exactAgeInputField {
+  width: 100px;
+}
+
+.ageRangeSliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ageRangeSliders.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.filterErrors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-height: 1.2rem;
+}
+
+.filterError {
+  font-size: 0.8rem;
+  color: #dc2626;
+}
+
+.ageSliderRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.ageSliderRow label {
+  min-width: 90px;
+  white-space: nowrap;
+}
+
+.ageSliderRow input[type='range'] {
+  width: 140px;
+}
