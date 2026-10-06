@@ -28,7 +28,7 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
       >
         Edit Profile
       </Link>
-      {isAdmin ? (
+      {isAdmin && (
         <Link
           href="/admin-dashboard"
           className={
@@ -39,8 +39,6 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
         >
           Admin Dashboard
         </Link>
-      ) : (
-        <span></span>
       )}
     </div>
   );

@@ -24,6 +24,9 @@ export default function ProfilePicture({
 
   // Once polling reports a result, re-render the server component so the rest
   // of the profile (e.g. the admin-only classification) picks it up too.
+  // This is an effect because refresh() is a side effect that can't run during
+  // render (it would re-trigger itself), and no user event starts it, only the
+  // polled status changing.
   const polledStatus = data?.status;
   useEffect(() => {
     if (polledStatus && polledStatus !== "processing") router.refresh();
