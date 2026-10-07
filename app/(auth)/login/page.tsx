@@ -103,7 +103,7 @@ export default function Login() {
         {/* error stemming from server-side validation */}
         {errorMessage && <p className="form-field-error">{errorMessage}</p>}
       </form>
-      <hr className="divider" />
+      <hr className="divider-spaced" />
       <div className="text-center">
         Dont have an account?{" "}
         <Link href="/register" className="text-button">

@@ -254,6 +254,11 @@ select.input-field {
 .form-label {
   font-weight: 500;
 }
+.divider-spaced {
+  height: 2px;
+  margin: 1rem 0;
+  color: rgb(168, 167, 167);
+}
 
 .divider {
   height: 2px;
