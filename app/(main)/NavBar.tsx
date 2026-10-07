@@ -16,6 +16,7 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
             : `${styles.navLink}`
         }
       >
+        <span className="material-symbols-outlined">home</span>
         Home
       </Link>
       <Link
@@ -26,6 +27,7 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
             : `${styles.navLink}`
         }
       >
+        <span className="material-symbols-outlined">person_edit</span>
         Edit Profile
       </Link>
       {isAdmin && (
@@ -37,6 +39,7 @@ export default function NavBar({ isAdmin }: { isAdmin: boolean }) {
               : `${styles.navLink}`
           }
         >
+          <span className="material-symbols-outlined">view_list</span>
           Dashboard
         </Link>
       )}

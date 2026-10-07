@@ -14,7 +14,7 @@ export default async function MainLayout({ children }: LayoutProps<"/">) {
       <footer className="footer flex-col flex items-center mt-2">
         <hr className="divider w-full" />
         <p>
-          <i>Photo Classification App</i>
+          <i>Photo Classification App (Next.js)</i>
         </p>
         <Suspense>
           <LogOutButton />
