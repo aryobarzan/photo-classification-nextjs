@@ -4,6 +4,7 @@ import { COUNTRIES } from "@/app/lib/data/countries";
 import { UserProfile } from "@/app/lib/schemas/user";
 import { useMemo, useState } from "react";
 import styles from "./Dashboard.module.css";
+import Link from "next/link";
 
 type SortKey = keyof Pick<
   UserProfile,
@@ -98,8 +99,18 @@ export default function ProfileTable({
         </thead>
         <tbody>
           {paged.map((userProfile) => (
-            <tr key={userProfile.user_id} className={styles.clickableRow}>
-              <td>{userProfile.first_name}</td>
+            <tr
+              key={userProfile.user_id}
+              className={`${styles.clickableRow} relative`}
+            >
+              <td>
+                <Link
+                  href={`/dashboard/profile/${userProfile.user_id}`}
+                  className="after:absolute after:inset-0 after:content-['']"
+                >
+                  {userProfile.first_name}
+                </Link>
+              </td>
               <td>{userProfile.last_name}</td>
               <td>{userProfile.age}</td>
               <td>{userProfile.gender}</td>

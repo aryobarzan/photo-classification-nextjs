@@ -1,0 +1,51 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--primary);
+  border-radius: 9999px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dropdownBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+.dropdownPanel {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 11;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  padding: 0.25rem 0;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.dropdownOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.dropdownOption:hover {
+  background-color: #f8fafc;
+}
