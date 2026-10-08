@@ -126,6 +126,7 @@ The corresponding URL with the search params: http://localhost:3000/dashboard?mi
 
 </details>
 
+<details>
 <summary>Dashboard loading indicator</summary>
 
 ![Dashboard loading indicator](screenshots/8.png)
